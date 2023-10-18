@@ -1,0 +1,50 @@
+---
+- name: Install Docker on Debian
+  hosts: add server ip 
+  become: yes
+
+  tasks:
+    - name: Update apt repositories
+      apt:
+        update_cache: yes
+      tags:
+        - update
+
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+      tags:
+        - install
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+      tags:
+        - install
+
+    - name: Add Docker APT repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+      tags:
+        - install
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+      tags:
+        - install
+
+    - name: Start and enable Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      tags:
+        - install
