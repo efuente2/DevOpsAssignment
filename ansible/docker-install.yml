@@ -1,16 +1,9 @@
 ---
 - name: Install Docker on Debian
-  hosts: 155.138.211.47
-  become: yes
+  hosts: all
+  become: true
 
   tasks:
-   - name: Clone Git repository
-      git:
-        repo: https://github.com/efuente2/DevOpsAssignment.git
-        dest: /repo
-      tags:
-        - git
-
     - name: Update apt repositories
       apt:
         update_cache: yes
