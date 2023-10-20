@@ -7,5 +7,8 @@ COPY index.html /usr/share/nginx/html/index.html
 # Copy your CSS files into the container
 COPY css/ /usr/share/nginx/html/css/
 
+# Copy your images into the container
+COPY images/ /usr/share/nginx/html/images/
+
 # Expose port 80 for Nginx
 EXPOSE 80

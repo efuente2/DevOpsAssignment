@@ -25,6 +25,7 @@
     - name: Add Docker GPG key
       apt_key:
         url: https://download.docker.com/linux/debian/gpg
+        state: present
       tags:
         - install
 
@@ -48,3 +49,5 @@
         enabled: yes
       tags:
         - install
+
+
